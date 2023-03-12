@@ -1,0 +1,99 @@
+---------------------------
+List of instructions done in Shell
+
+>>> from news.models import *
+Создать двух пользователей (с помощью метода User.objects.create_user('username')).
+>>> User.objects.create_user('Nick')
+>>> User.objects.create_user('Polina')
+>>> User.objects.create_user('Mike')
+>>> User.objects.create_user('Fred')
+
+Создать два объекта модели Author, связанные с пользователями.
+>>> Author.objects.create(user=User(1))
+>>> Author.objects.create(user=User(2))
+>>> Author.objects.create(user=User(3))
+
+Добавить 4 категории в модель Category.
+>>> Category.objects.create(name_cat = 'Politics')
+>>> Category.objects.create(name_cat = 'Business')
+>>> Category.objects.create(name_cat = 'Culture')
+>>> Category.objects.create(name_cat = 'Health')
+>>> Category.objects.create(name_cat = 'Sport')
+
+Добавить 2 статьи и 1 новость.
+>>> a1=Author.objects.get(id=1)
+>>> a2=Author.objects.get(id=2)
+>>> a3=Author.objects.get(id=3)
+>>> Post.objects.create(author=a1, charact='NW', title='Last News', text='Text of Last News')
+>>> Post.objects.create(author=a1, charact='AR', title = 'Interesting article from Nick', text='This is text of the interesting article from Nick')
+>>> Post.objects.create(author=a2, charact='AR', title='Article from Polina', text='This is article from Polina about sport')
+>>> mike=Author.objects.get(id=3)
+>>> Post.objects.create(author=mike, title='News from Mike', text='This is news from Mike')
+...
+
+Присвоить им категории (как минимум в одной статье/новости должно быть не меньше 2 категорий).
+>>> politics=Category.objects.get(id=1)
+>>> business=Category.objects.get(id=2)
+>>> culture=Category.objects.get(id=3)
+>>> health=Category.objects.get(id=4)
+>>> sport=Category.objects.get(id=5)
+>>> p2=Post.objects.get(id=2)
+>>> PostCategory.objects.create(post=p2, category=health)
+>>> p3=Post(3)
+>>> PostCategory.objects.create(post=p3, category=sport)
+>>> PostCategory.objects.create(post=p3, category=health)
+>>> p4=Post.objects.get(id=4)
+>>> PostCategory.objects.create(post=p4, category=culture)
+
+Создать как минимум 4 комментария к разным объектам модели Post (в каждом объекте должен быть как минимум один комментарий).
+>>> Comment.objects.create(comm='This is comment of Nick as author on own news1', post=Post.objects.get(id=1), user=User.objects.get(id=1)
+... )
+>>> Comment.objects.create(comm='This is comment from Fred on news from Nick', post=Post.objects.get(id=1), user= User.objects.get(id=4))
+>>> Comment.objects.create(comm='This comment of Fred on the article from Polina', post=Post.objects.get(id=3), user=User.objects.get(id=4))
+>>> Comment.objects.create(comm='This comment of Nick on the article from Polina', post=Post.objects.get(id=3), user=User.objects.get(id=1))
+>>> Comment.objects.create(comm='This is comment of Polina to own article', post=Post.objects.get(id=3), user= User.objects.get(id=2))
+>>> Comment.objects.create(comm='This is comment on the news from Mike', post=p4, user=User.objects.get(id=3))
+...
+
+Применяя функции like() и dislike() к статьям/новостям и комментариям, скорректировать рейтинги этих объектов.
+>>> c9=Comment.objects.get(id=9)
+>>> c9.dislike()
+>>> p4=Post.objects.get(id=4)
+>>> p4.dislike()
+... (не буду приводить все команды like() и dislike() - - все работает)
+
+Обновить рейтинги пользователей.
+>>> nick=Author.objects.get(id=1)
+>>> nick.update_rating()
+>>> query = Author.objects.all()
+>>> print(query)
+<QuerySet [<Author: User name: Nick, rating = 15>, <Author: User name: Polina, rating = 9>, <Author: User name: Mike, rating = 0>]>
+.... (не буду приводить все команды update_rating() - все работает))
+
+Вывести username и рейтинг лучшего пользователя (применяя сортировку и возвращая поля первого объекта).
+>>> print(Author.objects.all().order_by('rating').last())
+Polina, rating = 19
+
+Вывести дату добавления, username автора, рейтинг, заголовок и превью лучшей статьи, основываясь на лайках/дислайках к этой статье.
+>>> print(Post.objects.all().order_by('rating_post').last())
+Date of creation: 2023-03-10 14:59:34.108024+00:00
+Author: Polina
+Rating: 6
+Title: Article from Polina
+This is article from Polina about sport...
+
+Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
+>>> p=Post.objects.all().order_by('rating_post').last()
+>>> bpid=p.id
+>>> querycomm=Comment.objects.filter(post=bpid)
+>>> for i in range(len(querycomm)): print(querycomm[i])
+...
+Date: 2023-03-11 04:42:04.329251+00:00, Created by: Fred, Rating: 1, Comment: This comment of Fred on the article from Polina
+Date: 2023-03-11 04:47:44.076597+00:00, Created by: Nick, Rating: -1, Comment: This comment of Nick on the article from Polina
+Date: 2023-03-11 04:50:37.665510+00:00, Created by: Polina, Rating: 1, Comment: This is comment of Polina to own article
+
+>>> quit()
+
+
+
+...
