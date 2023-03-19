@@ -1,0 +1,32 @@
+<!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+<!-- Подключаем новый файл с нашим тегом -->
+{% load custom_tags %}
+
+<!-- Название у нас будет Product -->
+{% block title %}
+Post
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
+{% block content %}
+<p>&nbsp;</p>
+<h1 style="text-align: left;">
+    <span style="text-decoration: underline; color: #0000ff;">{{ post.title|censor }}</span>
+</h1>
+<p>&nbsp;</p>
+<h2 style="text-align: left;">
+    <em>{{ post.author }}</em>
+</h2>
+<h6 style="text-align: left;">
+    <em>{{ post.time_in}}</em>
+</h6>
+<p>&nbsp;</p>
+
+<h5 style="text-align: left;">
+    {{ post.text|censor|linebreaks }}
+</h5>
+
+{% endblock content %}
