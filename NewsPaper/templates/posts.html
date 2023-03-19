@@ -13,7 +13,7 @@ Posts
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
     <h1>Последние новости</h1>
-    <h2><span style="color:#0000ff">Всего новостей: {{ posts|length }}</span></h2>
+    <!--<h2><span style="color:#0000ff">Всего новостей: {{ posts|length }}</span></h2>-->
     <!-- Используем переданную из представления переменную time_now
    и применяем к ней фильтр date. По назначению этот фильтр очень похож
    на метод strftime у объекта datetime в Python — вывод времени
@@ -26,6 +26,7 @@ Posts
    то выведется указанный в фильтре текст -->
     <!--<h3>{{ next_sale|default_if_none:"We will inform you about sales later"}}</h3>-->
     <hr>
+
 <!-- Выводим товары, только если они есть с помощью тега if -->
     {% if posts %}
         <table> <!-- Начинаем описывать таблицу -->
@@ -48,13 +49,13 @@ Posts
                 в следующем столбце описание, и т.д.  -->
                 <td style="text-align: left; width:200px" >{{ post.time_in|date:'d-m-Y / P'  }}</td>
                 <td style="text-align: left; width:300px">
-                    <a href="{%url 'post_detail' post.id %}">{{ post.title|censor }}</a>
+                    <a href="{%url 'post' post.id %}">{{ post.title|censor }}</a>
                 </td>
                 <!-- Добавим специальный фильтр truncatechars,
                 чтобы ограничить количество символов до 15.
                 Все остальные символы превратятся в многоточие. -->
                 <td style="text-align: left; width:450px">
-                    <a href="{%url 'post_detail' post.id %}">{{ post.text | truncatechars:25 }}</a></td>
+                    <a href="{%url 'post' post.id %}">{{ post.text | truncatechars:25 }}</a></td>
 
                 <!-- Используем наш фильтр -->
 
@@ -65,4 +66,28 @@ Posts
 <!-- Если товаров нет, говорим, что товаров нет ;) -->
         <h2>Новостей нет</h2>
     {% endif %}
+
+{# D4.2 : ad pagination on the page #}
+
+{# Информация о предыдущих страницах #}
+{% if page_obj.has_previous %}
+    <a href="?{% url_replace page=1 %}">1</a>
+    {% if page_obj.previous_page_number != 1 %}
+        ...
+        <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+    {% endif %}
+{% endif %}
+
+{# Информация о текущей странице #}
+{{ page_obj.number }}
+
+{# Информация о следующих страницах #}
+{% if page_obj.has_next %}
+    <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+    {% if paginator.num_pages != page_obj.next_page_number %}
+        ...
+        <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+    {% endif %}
+{% endif %}
+
 {% endblock content %}
