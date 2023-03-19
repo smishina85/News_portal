@@ -3,6 +3,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.db.models import Avg, F, Max, Min
+from django.core.validators import MinValueValidator
 
 
 class Author(models.Model):
@@ -10,7 +11,7 @@ class Author(models.Model):
     rating = models.SmallIntegerField(default=0)
 
     def __str__(self):
-        return f"{self.user}, rating = {self.rating}"
+        return f"{self.user.first_name} {self.user.last_name}"
 
     def update_rating(self):
         postRat = self.post_set.all().aggregate(Sum('rating_post'))
@@ -31,6 +32,9 @@ class Author(models.Model):
 
 class Category(models.Model):
     name_cat = models.CharField(max_length=64, unique=True)
+
+    def __str__(self):
+        return f"{self.name_cat}"
 
 
 class Post(models.Model):
