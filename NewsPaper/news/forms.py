@@ -1,5 +1,6 @@
 # D4.3
 from importlib.resources import _
+from urllib import request
 
 from django import forms
 from django.core.exceptions import ValidationError
@@ -15,7 +16,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = [
-            'author',
+            #'author',
             'charact',
             'title',
             'text',
@@ -40,4 +41,12 @@ class PostForm(forms.ModelForm):
         if title[0].islower():
             raise ValidationError("Заголовок должен начинаться с заглавной буквы")
         return title
+
+    # def clean_author(self):
+    #     author = self.cleaned_data['author']
+    #     if author != request.user.author:
+    #         raise ValidationError("mistake in author")
+    #     return author
+
+
 

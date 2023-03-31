@@ -111,6 +111,10 @@ class PostCreate(PermissionRequiredMixin, CreateView):
     model = Post
     template_name = 'post_create.html'
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user.author
+        return super().form_valid(form)
+
 class PostDelete(PermissionRequiredMixin, DeleteView):
     permission_required = ('news.delete_post')
     model = Post

@@ -42,10 +42,12 @@ Post
 <div>
         <div class="nav">
         {% if perms.news.change_post %}
+            {% if post.author == request.user.author %}
                     <a href="{% url 'post_edit' pk=post.id %}">
                     <h5 style="font-size: 15px; font-family: Times, serif; color: grey";>
                         <button>Изменить</button></h5>
                     </a>
+            {% endif %}
         {% endif %}
         </div>
 
