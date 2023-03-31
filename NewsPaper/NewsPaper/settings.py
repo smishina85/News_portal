@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.yandex',
     'django.contrib.flatpages',
     'news',
-    'accounts',
     'django_filters',
 ]
 
@@ -76,6 +79,17 @@ TEMPLATES = [
         },
     },
 ]
+
+# Этого раздела может не быть, добавьте его в указанном виде for allauth.
+AUTHENTICATION_BACKENDS = [
+    #встроенный бэкенд Django — 'django.contrib.auth.backends.ModelBackend' — реализующий аутентификацию по username;
+    'django.contrib.auth.backends.ModelBackend',
+    #бэкенд аутентификации, предоставленный пакетом allauth — 'allauth.account.auth_backends.AuthenticationBackend'.
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
+
 
 WSGI_APPLICATION = 'NewsPaper.wsgi.application'
 
@@ -134,7 +148,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
+LOGIN_REDIRECT_URL = "/allnews"
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_FORMS = {"signup": "accounts.forms.CustomSignupForm"}
+
 warnings.filterwarnings(
     'error', r"DateTimeField .* received a naive datetime",
     RuntimeWarning, r'django\.db\.models\.fields',
 )
+

@@ -12,18 +12,54 @@ Post
 
 <!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
 {% block content %}
+
+<style>
+   button {
+    background: #007E3E; /* Цвет фона */
+    width: 180px;
+    color: #fff; /* Цвет текста */
+    padding: 10px; /* Поля вокруг текста */
+    border-radius: 10px; /* Уголки */
+   }
+</style>
+
+<hr>
+
 <p>&nbsp;</p>
 <h1 style="text-align: left;">
-    <span style="text-decoration: underline; color: #0000ff;">{{ post.title|censor }}</span>
+    <span style="text-decoration: none ; color: #808080;">{{ post.title|censor }}</span>
 </h1>
 <p>&nbsp;</p>
 <h2 style="text-align: left;">
     <em>{{ post.author }}</em>
 </h2>
+
 <h6 style="text-align: left;">
     <em>{{ post.time_in}}</em>
 </h6>
-<p>&nbsp;</p>
+
+{# Теперь будем проверять не request.user.is_authenticated, а конкретные права #}
+<div>
+        <div class="nav">
+        {% if perms.news.change_post %}
+                    <a href="{% url 'post_edit' pk=post.id %}">
+                    <h5 style="font-size: 15px; font-family: Times, serif; color: grey";>
+                        <button>Изменить</button></h5>
+                    </a>
+        {% endif %}
+        </div>
+
+        <div class="nav">
+
+        {% if perms.news.delete_post %}
+                    <a href="{% url 'post_delete' post.id %}">
+                        <h5 style="font-size: 15px; font-family: Times, serif; color: grey">
+                            <button>Удалить</button></h5>
+                    </a>
+        {% endif %}
+
+        </div>
+</div>
 
 <h5 style="text-align: left;">
     {{ post.text|censor|linebreaks }}

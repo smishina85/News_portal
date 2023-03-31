@@ -1,11 +1,22 @@
 {% extends 'flatpages/default.html' %}
 
 {% block content %}
+
+<style>
+   button {
+    background: #007E3E; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    padding: 10px; /* Поля вокруг текста */
+    border-radius: 10px; /* Уголки */
+   }
+</style>
+
 <h1>Удаление статьи или новости</h1>
 <hr>
 <form action="" method="post">
   {% csrf_token %}
-  <p>Удаляем "{{ object.title }}"?</p>
+    <p>Удаляем "{{ object.title }}"?</p>
   <input type="submit" value="Delete" />
 </form>
 {% endblock content %}
+

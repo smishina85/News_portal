@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin   # D5.6
 from datetime import datetime
 from django.urls import reverse_lazy
 from django.shortcuts import render
@@ -103,17 +104,21 @@ class PostSearch(ListView):
 #         context['time_now'] = datetime.utcnow()
         return context
 
-class PostCreate(CreateView):
+class PostCreate(PermissionRequiredMixin, CreateView):
+    permission_required = ('news.add_post',)
+    raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'post_create.html'
 
-class PostDelete(DeleteView):
+class PostDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = ('news.delete_post')
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('posts')
 
-class PostUpdate(UpdateView):
+class PostUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = ('news.change_post')
     form_class = PostForm
     model = Post
     template_name = "post_edit.html"

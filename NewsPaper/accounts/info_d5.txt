@@ -1,0 +1,11 @@
+есть 9 пользователей:
+
+admin - superuser
+
+common users (no permissions) : snys, Fred
+
+authors: all the rest
+
+Добавила красивые кнопки
+
+форма поиска не очень красивая - как сделать лучше не знаю
