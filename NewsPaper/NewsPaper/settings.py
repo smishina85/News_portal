@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 from pathlib import Path
-import warnings
+#import warnings
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'news',
     'django_filters',
+    'accounts',
+    'django_apscheduler',
 ]
 
 SITE_ID = 1
@@ -149,16 +154,43 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 LOGIN_REDIRECT_URL = "/allnews"
+LOGOUT_REDIRECT_URL = '/allnews'
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_FORMS = {"signup": "accounts.forms.CustomSignupForm"}
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True  #позволит избежать дополнительного входа и активирует аккаунт сразу, как только мы перейдём по ссылке
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 4  #хранит количество дней, когда доступна ссылка на подтверждение регистрации
 
-warnings.filterwarnings(
-    'error', r"DateTimeField .* received a naive datetime",
-    RuntimeWarning, r'django\.db\.models\.fields',
+# warnings.filterwarnings(
+#     'error', r"DateTimeField .* received a naive datetime",
+#     RuntimeWarning, r'django\.db\.models\.fields',
+# )
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #класс отправителя сообщений (у нас установлено значение по умолчанию, а значит, эта строчка не обязательна);
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru' #хост почтового сервера
+EMAIL_PORT = 465 #порт, на который почтовый сервер принимает письма
+EMAIL_HOST_USER = 'kind.mishina' #логин пользователя почтового сервера
+#EMAIL_HOST_PASSWORD = "________" #пароль пользователя почтового сервера
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD') #пароль пользователя почтового сервера
+EMAIL_USE_TLS = False #необходимость использования TLS (зависит от почтового сервера, смотрите документацию по настройке работы с сервером по SMTP)
+EMAIL_USE_SSL = True #необходимость использования SSL (зависит от почтового сервера, смотрите документацию по настройке работы с сервером по SMTP);
+
+#DEFAULT_FROM_EMAIL = '______' #почтовый адрес отправителя по умолчанию.
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL') #почтовый адрес отправителя по умолчанию.
+
+SERVER_EMAIL = 'kind.mishina@yandex.ru'
+MANAGERS = (
+    ('Svetlana', 'kind.mishina@yandex.ru'),
 )
+ADMINS = (
+    ('admin', 'snys@mac.com'),
+)
+
+EMAIL_SUBJECT_PREFIX = 'Наш портал '
 

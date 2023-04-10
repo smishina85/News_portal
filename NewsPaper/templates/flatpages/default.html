@@ -61,9 +61,15 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/accounts/login/">LOGIN</a>
-                        </li>
+                        </li>-->
                         <li class="nav-item">
-                            <a class="nav-link" href="/accounts/signup">Регистрация</a>
+                            <a class="nav-link" href="/allnews/subscriptions/">Подписки</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accounts/login">Регистрация</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accounts/logout">Logoff</a>
                         </li> -->
 
                     </ul>
@@ -85,6 +91,18 @@
                 </div>
             </div>
         </div>
+
+
+
+{% if request.user.is_authenticated %}
+
+    <a href="{% url 'account_logout' %}"></a>
+{% else %}
+
+        <a href="{% url 'account_login' %}"></a>
+{% endif %}
+
+
 
     </body>
 </html>

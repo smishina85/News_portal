@@ -1,3 +1,6 @@
+from django.contrib.auth.decorators import login_required  # D6.4
+from django.db.models import Exists, OuterRef  #D6.4
+from django.views.decorators.csrf import csrf_protect  #D6.4
 from django.contrib.auth.mixins import PermissionRequiredMixin   # D5.6
 from datetime import datetime
 from django.urls import reverse_lazy
@@ -6,6 +9,7 @@ from django.shortcuts import render
 # что в этом представлении мы будем выводить список объектов из БД
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
+from .models import Subscription, Category  #D6.4
 from .filters import PostFilter
 from .forms import PostForm
 from pprint import pprint
@@ -127,3 +131,38 @@ class PostUpdate(PermissionRequiredMixin, UpdateView):
     model = Post
     template_name = "post_edit.html"
 
+#D6.4
+
+@login_required   #Его могут использовать только зарегистрированные пользователи
+@csrf_protect   #у нас будет автоматически проверяться CSRF-токен в получаемых формах
+def subscriptions(request):
+    if request.method == 'POST':
+        category_id = request.POST.get('category_id')
+        category = Category.objects.get(id=category_id)
+        action = request.POST.get('action')
+
+        if action == 'subscribe':
+            Subscription.objects.create(user=request.user,
+                                        category=category)
+        elif action == 'unsubscribe':
+            Subscription.objects.filter(user=request.user,
+                                        category=category,
+                                        ).delete()
+    categories_with_subscriptions = Category.objects.annotate(
+        user_subscribed=Exists(
+            Subscription.objects.filter(
+                user=request.user,
+                category=OuterRef('pk'),
+            )
+        )
+    ).order_by('name_cat')
+    return render(
+        request,
+        'subscriptions.html',
+        {'categories': categories_with_subscriptions},
+    )
+#В представлении мы можем принять как GET, так и POST-запросы:
+# GET — будут выполняться, когда пользователь просто открывает страницу подписок;
+# POST — когда пользователь нажмёт кнопку подписки или отписки от категории.
+#Далее по коду мы делаем непростой запрос в базу данных. Мы соберём все категории товаров с сортировкой по алфавиту и
+# добавим специальное поле, которое покажет, подписан сейчас пользователь на данную категорию или нет.

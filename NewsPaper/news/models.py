@@ -38,7 +38,7 @@ class Category(models.Model):
     name_cat = models.CharField(max_length=64, unique=True)
 
     def __str__(self):
-        return f"{self.name_cat}"
+        return f"{self.name_cat.title()}"
 
     class Meta:
         verbose_name = 'Категория'
@@ -127,5 +127,16 @@ class Comment(models.Model):
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
 
+class Subscription(models.Model):
+    user = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
+        related_name='subscriptions',
+    )
+    category = models.ForeignKey(
+        to='Category',
+        on_delete=models.CASCADE,
+        related_name='subscription'
+    )
 
 
