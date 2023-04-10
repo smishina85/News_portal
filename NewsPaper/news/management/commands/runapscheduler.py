@@ -81,7 +81,7 @@ class Command(BaseCommand):
 
         scheduler.add_job(
             my_job,
-            trigger=CronTrigger('0 10 * * 1'), # Every Munday at 10.00
+            trigger=CronTrigger('0 18 * * 4'), # Every Friday at 18.00
             #trigger=CronTrigger("*/30"), # every 30 seconds
             id="my_job", # The `id` assigned to each job MUST be unique
             max_instances=1,
