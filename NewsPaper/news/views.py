@@ -14,6 +14,11 @@ from .filters import PostFilter
 from .forms import PostForm
 from pprint import pprint
 
+from django.http import HttpResponse  #D7.4
+from django.views import View  #D7.4
+#from .tasks import hello, printer  #D7.4
+from datetime import datetime, timedelta
+
 
 class PostsList(ListView):
          # Указываем модель, объекты которой мы будем выводить
@@ -166,3 +171,16 @@ def subscriptions(request):
 # POST — когда пользователь нажмёт кнопку подписки или отписки от категории.
 #Далее по коду мы делаем непростой запрос в базу данных. Мы соберём все категории товаров с сортировкой по алфавиту и
 # добавим специальное поле, которое покажет, подписан сейчас пользователь на данную категорию или нет.
+
+# class IndexView(View):
+#     def get(self, request):
+#         #printer.delay(10)
+#         #printer.apply_async([10], countdown = 5)  # apply_async
+#         printer.apply_async([10], eta = datetime.now() + timedelta(seconds=5))
+#         hello.delay()
+#         return HttpResponse('Hello!')
+
+# Здесь мы использовали класс-представление.
+# В методе get() мы написали действия, которые хотим выполнить при вызове этого
+# представления — выполнить задачу hello (метод delay() обсудим чуть позже) и вернуть только 'Hello!' в браузер.
+# Запустите Django и перейдите на страницу http://127.0.0.1/.

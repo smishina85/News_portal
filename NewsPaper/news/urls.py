@@ -4,6 +4,8 @@ from .views import PostsList, PostDetail, PostCreate, PostSearch, PostDelete, Po
 
 
 
+
+
 urlpatterns = [
 # path — означает путь.
    # В данном случае путь ко всем новостям у нас останется пустым,
@@ -20,4 +22,5 @@ urlpatterns = [
     path('<int:pk>/delete/', PostDelete.as_view(), name='post_delete'),
     path('<int:pk>/edit/', PostUpdate.as_view(), name='post_edit'),
     path('subscriptions/', subscriptions, name='subscriptions'),
+    #path('index/', IndexView.as_view()),
 ]

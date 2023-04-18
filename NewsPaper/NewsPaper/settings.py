@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django_filters',
     'accounts',
     'django_apscheduler',
+    'django_celery_beat',
 ]
 
 SITE_ID = 1
@@ -193,4 +194,22 @@ ADMINS = (
 )
 
 EMAIL_SUBJECT_PREFIX = 'Наш портал '
+
+CELERY_BROKER_URL = 'redis://localhost:6379'  # указывает на URL брокера сообщений (Redis). По умолчанию он находится на порту 6379.
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'  #указывает на хранилище результатов выполнения задач
+CELERY_ACCEPT_CONTENT = ['application/json']  # допустимый формат данных
+CELERY_TASK_SERIALIZER = 'json'  # метод сериализации задач.
+CELERY_RESULT_SERIALIZER = 'json' # метод сериализации результатов.
+CELERY_IMPORTS = ('news.tasks',)
+CELERY_TIMEZONE = 'Europe/Moscow'
+#CELERY_TASK_TIME_LIMIT = 30 * 60
+# время жизни таски
+
+# Если вы используете Redis Labs, то переменные CELERY_BROKER_URL и CELERY_RESULT_BACKEND должны строиться по шаблону:
+#
+# redis://логин:пароль@endpoint:port
+# где endpoint и port вы также берёте из настроек Redis Labs.
+
+# Также обратите внимание, что Celery с версией выше 4+ не поддерживается Windows.
+# Поэтому если у вас версия Python 3.10 и выше, запускайте Celery, добавив в команду флаг: --pool=solo.
 
