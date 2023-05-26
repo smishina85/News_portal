@@ -1,10 +1,10 @@
-from django.contrib.auth.models import User
-from django.core.mail import EmailMultiAlternatives
 from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
 
-from .models import PostCategory
 from news.tasks import notification
+
+from .models import PostCategory
+
 
 # @receiver(m2m_changed, sender=PostCategory)
 # def notification(sender, instance, **kwargs):
@@ -42,13 +42,14 @@ from news.tasks import notification
 #                 else:
 #                     pass
 
+
 @receiver(m2m_changed, sender=PostCategory)
 def new_post_notification(sender, instance, **kwargs):
     if kwargs['action'] == 'post_add':
         notification.delay(instance.id)
 
 
-#Просто так сигналы не начнут работать. Нам нужно выполнить этот модуль (файл с Python-кодом).
+# Просто так сигналы не начнут работать. Нам нужно выполнить этот модуль (файл с Python-кодом).
 # Для этого подойдёт автоматически созданный файл apps.py в нашем приложении.
 # В этом файле есть единственный класс с настройками нашего приложения.
 # Добавим в него метод ready, который выполнится при завершении конфигурации нашего приложения

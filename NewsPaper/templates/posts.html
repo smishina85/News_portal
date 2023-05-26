@@ -7,9 +7,12 @@
 {% load custom_tags %}
 
 <!-- Название у нас будет posts -->
-{% block title %}
-Posts
-{% endblock title %}
+{% load cache %}
+    {% cache 60 title %}
+        {% block title %}
+            Posts
+        {% endblock title %}
+    {% endcache %}
 
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
@@ -34,9 +37,6 @@ Posts
     <h5>{{ time_now|date:'d-m-Y, l' }}</h5>
    <!-- А вот так мы используем наш тег-->
 
-<!--Если в переменной next_sale будет None,
-   то выведется указанный в фильтре текст -->
-    <!--<h3>{{ next_sale|default_if_none:"We will inform you about sales later"}}</h3>-->
     <hr>
 
 {# Теперь будем проверять не request.user.is_authenticated, а конкретные права #}

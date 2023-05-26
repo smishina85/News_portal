@@ -1,0 +1,2 @@
+WARNING: 2023-05-25 12:14:14,287; module: log; Forbidden (CSRF token missing.): /allnews/71/edit/
+WARNING: 2023-05-25 12:23:58,911; module: log; Forbidden (CSRF token missing.): /allnews/71/edit/

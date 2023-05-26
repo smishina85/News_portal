@@ -1,9 +1,16 @@
 {% extends 'flatpages/default.html' %}
 <meta charset="utf-8" />
-{% block title %}
-Subscriptions
-{% endblock title %}
 
+{% load cache %}
+    {% cache 60 title %}
+        {% block title %}
+            Subscriptions
+        {% endblock title %}
+    {% endcache %}
+
+
+{% load cache %}
+    {% cache 30 content %}
 {% block content %}
 
     <h1>Подписки</h1>
@@ -24,3 +31,4 @@ Subscriptions
       </p>
     {% endfor %}
 {% endblock content %}
+    {% endcache %}

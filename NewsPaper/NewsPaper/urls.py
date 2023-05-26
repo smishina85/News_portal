@@ -14,20 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('accounts/', include('django.contrib.auth.urls')),
     # path('accounts/', include("accounts.urls")),
-    path('accounts/', include("allauth.urls")), # Оставили только allauth
+    path('accounts/', include("allauth.urls")),  # Оставили только allauth
     path('pages/', include('django.contrib.flatpages.urls')),
-# Делаем так, чтобы все адреса из нашего приложения (news/urls.py)
-   # подключались к главному приложению с префиксом allnews/.
+    # Делаем так, чтобы все адреса из нашего приложения (news/urls.py)
+    # подключались к главному приложению с префиксом allnews/.
     path('allnews/', include('news.urls')),
 ]
 
-    #Теперь нам стали доступны новые пути:
+# Теперь нам стали доступны новые пути:
 # accounts/login/ [name='login']
 # accounts/logout/ [name='logout']
 # accounts/password_change/ [name='password_change']
@@ -35,5 +35,6 @@ urlpatterns = [
 # accounts/password_reset/ [name='password_reset']
 # accounts/password_reset/done/ [name='password_reset_done']
 # accounts/reset/// [name='password_reset_confirm']accounts/reset/done/ [name='password_reset_complete']
-#С подробностями использования представлений (view), связанных с каждым из этих путей, можно ознакомиться в официальной документации.
+# С подробностями использования представлений (view),
+# связанных с каждым из этих путей, можно ознакомиться в официальной документации.
 # https://docs.djangoproject.com/en/4.0/topics/auth/default/#all-authentication-views

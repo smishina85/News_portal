@@ -1,30 +1,30 @@
 # D4.3
 from importlib.resources import _
-from urllib import request
 
 from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import Textarea, ModelMultipleChoiceField
+from django.forms import ModelMultipleChoiceField, Textarea
 
-from .models import Post, Category
+from .models import Category, Post
 
 
 class PostForm(forms.ModelForm):
-    title = forms.CharField(label= 'Заголовок', min_length=4)
+    title = forms.CharField(label='Заголовок', min_length=4)
     post = ModelMultipleChoiceField(label='Категория', queryset=Category.objects.all())
 
     class Meta:
         model = Post
         fields = [
-            #'author',
+            # 'author',
             'charact',
             'title',
             'text',
             'post',
         ]
-        labels = {'text': _('Ваш Текст'),}
-        widgets={'title': Textarea(attrs={'cols': 128, 'rows': 2}), 'text': Textarea(attrs={'cols': 80, 'row': 10}),
-                 'post': Textarea(attrs={'cols': 50}),}
+        labels = {'text': _('Ваш Текст'), }
+        widgets = {'title': Textarea(attrs={'cols': 128, 'rows': 2}), 'text': Textarea(attrs={'cols': 80, 'row': 10}),
+                    'post': Textarea(attrs={'cols': 50}),
+                   }
 
     def clean(self):
         cleaned_data = super().clean()
@@ -35,7 +35,7 @@ class PostForm(forms.ModelForm):
                  "title": "Заголовок не может быть менее 4 смволов"
             })
         return cleaned_data
-    #
+
     def clean_title(self):
         title = self.cleaned_data["title"]
         if title[0].islower():
@@ -47,6 +47,3 @@ class PostForm(forms.ModelForm):
     #     if author != request.user.author:
     #         raise ValidationError("mistake in author")
     #     return author
-
-
-

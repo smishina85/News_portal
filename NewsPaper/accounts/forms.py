@@ -1,15 +1,13 @@
+# from django.contrib.auth.forms import UserCreationForm
+from allauth.account.forms import SignupForm  # D5.5
+
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-
-#D5.5
-
-from allauth.account.forms import SignupForm
 from django.contrib.auth.models import Group
-from django.core.mail import send_mail
+from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
-from django.core.mail import mail_managers
+# from django.core.mail import send_mail
 from django.core.mail import mail_admins
+from django.core.mail import mail_managers
 
 
 class CustomSignupForm(SignupForm):
@@ -28,14 +26,14 @@ class CustomSignupForm(SignupForm):
         else:
             name = user.username
 
-        #send_mail(
-        subject=f'Добро пожаловать на наш новостной портал!'
-        #message=f'{user.username}, Вы успешно зарегестрировались!',
+        # send_mail(
+        subject = f'Добро пожаловать на наш новостной портал!'
+        # message=f'{user.username}, Вы успешно зарегестрировались!',
         text = f"{name}, Вы успешно зарегестрировались на сайте! Ваш логин - это Ваш электронный адрес: {user.email}"
-        #from_email=None, # будет использовано значение DEFAULT_FROM_EMAIL
-        #recipient_list=[user.email],
-        #)
-        #print(name)
+        # from_email=None, # будет использовано значение DEFAULT_FROM_EMAIL
+        # recipient_list=[user.email],
+        # )
+        # print(name)
         html = (
             f'<b>{name}</b>, Вы успешно зарегестрировались на '
             f'<a href="http://127.0.0.1:8000/products"> сайте</a>!'

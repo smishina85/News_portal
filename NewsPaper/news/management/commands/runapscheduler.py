@@ -1,20 +1,24 @@
+import datetime
 import logging
 
 from apscheduler.schedulers.blocking import BlockingScheduler
+
 from apscheduler.triggers.cron import CronTrigger
+
+from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand
+
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
-from django.core.management.base import BaseCommand
-from django_apscheduler import util
 import django_apscheduler.jobstores
+
+from django_apscheduler import util
 from django_apscheduler.models import DjangoJobExecution
 
-from news.models import Post, Category
-from django.contrib.auth.models import User
-import datetime
-
+from news.models import Category, Post
 
 logger = logging.getLogger(__name__)
+
 
 def my_job():
     date_wk_ago = datetime.datetime.today() - datetime.timedelta(days=7)
@@ -22,7 +26,7 @@ def my_job():
     # need posts with assigned category (if post created from admin panel there couldn't be a category assigned
     posts_categorized = posts.filter(post__isnull=False)
 
-    if posts_categorized: # if there is no any post for the last week no actions required
+    if posts_categorized:  # if there is no any post for the last week no actions required
         # create a dictionary where key is a name of category and value is a list of emails of subscribers
         categories = list(Category.objects.all())
 
@@ -33,11 +37,11 @@ def my_job():
             if emails:
                 subject = f'Posts published last week in category: {cat_name}'
                 text_content = ''
-                html_content =''
-                #print(cat_name)
+                html_content = ''
+                # print(cat_name)
                 # need to have the list of id of last week posts assigned to exact category
                 postid_exact_cat = list(set(posts_categorized.filter(post__name_cat__exact=cat_name).values_list('id', flat=True)))
-                #print(postid_exact_cat)
+                # print(postid_exact_cat)
 
                 for i in postid_exact_cat:
                     post = Post.objects.get(pk=i)
@@ -45,9 +49,9 @@ def my_job():
                     pub_date = (post.time_in).date()
                     text_content += (f'{pub_date}  |  {text_var}  |   Ссылка на post: http://127.0.0.1:8000{post.get_absolute_url()}\n')
                     html_content += (f'{pub_date}  |  {text_var}  |  <br><a href="http://127.0.0.1:8000{post.get_absolute_url()}"></a>\n')
-                #print(html_content)
-                #print(emails)
-                #print(text_content)
+                # print(html_content)
+                # print(emails)
+                # print(text_content)
 
                 for email in emails:
                     msg = EmailMultiAlternatives(subject, text_content, None, [email])
@@ -59,6 +63,7 @@ def my_job():
 # that have become unusable or are obsolete, are closed before and after your
 # job has run. You should use it to wrap any jobs that you schedule that access
 # the Django database in any way.
+
 @util.close_old_connections
 def delete_old_job_executions(max_age=604_800):
     """
@@ -72,6 +77,7 @@ def delete_old_job_executions(max_age=604_800):
         """
     DjangoJobExecution.objects.delete_old_job_executions(max_age)
 
+
 class Command(BaseCommand):
     help = "Runs APScheduler."
 
@@ -81,9 +87,9 @@ class Command(BaseCommand):
 
         scheduler.add_job(
             my_job,
-            trigger=CronTrigger('0 18 * * 4'), # Every Friday at 18.00
-            #trigger=CronTrigger("*/30"), # every 30 seconds
-            id="my_job", # The `id` assigned to each job MUST be unique
+            trigger=CronTrigger('0 18 * * 4'),  # Every Friday at 18.00
+            # trigger=CronTrigger("*/30"), # every 30 seconds
+            id="my_job",  # The `id` assigned to each job MUST be unique
             max_instances=1,
             replace_existing=True,
         )

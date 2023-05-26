@@ -17,23 +17,21 @@ FWORDS_VACSET = {
 # можно усложнить функцию чтобы и это отслеживалось - но в другой раз
 # проверка сначала проходит по букве что сократить время поиска
 
+
 @register.filter()
 def censor(textnews):
     word_list = textnews.split(' ')
-    #print(word_list)
+    # print(word_list)
     for idx, value in enumerate(word_list):
         if value:
             if value[0].lower() in FWORDS_VACSET.keys():
                 for el in FWORDS_VACSET[value[0].lower()]:
                     if el in value.lower():
-                    #print(el, value, idx)
+                        # print(el, value, idx)
                         corrected = value[0] + '*' * (len(el)-1) + value[len(el):]
-                    #print(corrected)
+                        # print(corrected)
                         word_list[idx] = corrected
-                    #word_list[idx][1:len(el)] = "*" * (len(el)-1)
-                    #print(word_list[idx])
+                        # word_list[idx][1:len(el)] = "*" * (len(el)-1)
+                        # print(word_list[idx])
 
     return ' '.join(word_list)
-
-
-

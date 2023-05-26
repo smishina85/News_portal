@@ -1,7 +1,5 @@
 import datetime
-from calendar import week
 
-from django.test import TestCase
 
 # Create your tests here.
 

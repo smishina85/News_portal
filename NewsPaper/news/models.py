@@ -1,9 +1,9 @@
-from django.db import models
-from datetime import datetime
 from django.contrib.auth.models import User
+from django.core.cache import cache
+from django.db import models
+
+# D8.4
 from django.db.models import Sum
-from django.db.models import Avg, F, Max, Min
-from django.core.validators import MinValueValidator
 from django.urls import reverse
 
 
@@ -12,6 +12,10 @@ class Author(models.Model):
     rating = models.SmallIntegerField(default=0)
 
     def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name}"
+
+    @property
+    def fio_author(self):
         return f"{self.user.first_name} {self.user.last_name}"
 
     def update_rating(self):
@@ -34,6 +38,7 @@ class Author(models.Model):
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
 
+
 class Category(models.Model):
     name_cat = models.CharField(max_length=64, unique=True)
 
@@ -54,11 +59,11 @@ class Post(models.Model):
     ]
     author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Автор")
     charact = models.CharField("Новость или Статья", max_length=2, choices=CHARACTER, default=NEWS)
-    time_in = models.DateTimeField(auto_now_add=True)
+    time_in = models.DateTimeField(auto_now_add=True, verbose_name="Date of creation")
     title = models.CharField("Заголовок", max_length=128)
     text = models.TextField("Ваш текст")
-    rating_post = models.SmallIntegerField(default=0)
-    post = models.ManyToManyField(Category,through='PostCategory', verbose_name="Категория")
+    rating_post = models.SmallIntegerField(default=0, verbose_name="Rating of the post")
+    post = models.ManyToManyField(Category, through='PostCategory', verbose_name="Категория")
 
     def like(self):
         self.rating_post += 1
@@ -72,26 +77,49 @@ class Post(models.Model):
         if self.text:
             return '{} ...'.format(self.text[:125])
 
+    # def __str__(self):
+    #     cat_list = list(((self.post).all()).values('name_cat'))
+    #     # if cat_list:
+    #     #     print(cat_list[0]['name_cat'])
+    #     cat_str = ''
+    #     if cat_list:
+    #         for i in range(len(cat_list)):
+    #             cat_str += cat_list[i]['name_cat'] + ' '
+    #     else:
+    #         cat_str += 'Assign category'
+    #     # print(cat_str)
+    #     # print(cat_list)
+    #     return f"Date of creation: {self.time_in}\n Author: {self.author.user}\n (Rating: {self.rating_post})\n Title: {self.title} \n( {cat_str})"
+
     def __str__(self):
+        return f"Date of creation: {self.time_in}\n Author: {self.author.user}\n (Rating: {self.rating_post})\n Title: {self.title}"
+
+    @property
+    def cat_adm(self):
         cat_list = list(((self.post).all()).values('name_cat'))
-        # if cat_list:
-        #     print(cat_list[0]['name_cat'])
         cat_str = ''
         if cat_list:
             for i in range(len(cat_list)):
-                cat_str += cat_list[i]['name_cat'] +' '
+                cat_str += cat_list[i]['name_cat'] + ' '
         else:
-            cat_str += 'Assign category'
-        #print(cat_str)
-        #print(cat_list)
-        return f"Date of creation: {self.time_in}\n Author: {self.author.user}\n (Rating: {self.rating_post})\n Title: {self.title} \n( {cat_str})"
+            cat_str += 'Category not assigned'
+        return cat_str
+
+
+
 
     def get_absolute_url(self):
         return reverse('post', args=[str(self.id)])
 
+    # D8.4
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # сначала вызываем метод родителя, чтобы объект сохранился
+        cache.delete(f'post-{self.pk}')  # затем удаляем его из кэша, чтобы сбросить его
+
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
+
 
 class PostCategory(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -127,6 +155,7 @@ class Comment(models.Model):
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
 
+
 class Subscription(models.Model):
     user = models.ForeignKey(
         to=User,
@@ -138,5 +167,3 @@ class Subscription(models.Model):
         on_delete=models.CASCADE,
         related_name='subscription'
     )
-
-

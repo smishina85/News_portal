@@ -1,20 +1,19 @@
 from celery import shared_task
-
-from django.core.mail import EmailMultiAlternatives
-
-from news.models import Post, Category
-from django.contrib.auth.models import User
 import datetime
 
+from django.contrib.auth.models import User
+from django.core.mail import EmailMultiAlternatives
+
+from news.models import Category, Post
 
 # @shared_task
 # def hello():
 #     time.sleep(10)
 #     print("hello world!")
 #
-# # Здесь мы использовали функцию sleep() из пакета time, чтобы остановить выполнение процесса на 10 секунд.
-# # Это поможет нам убедиться, что Клиент не «встал», пока выполняется эта задача.
-#
+# Здесь мы использовали функцию sleep() из пакета time, чтобы остановить выполнение процесса на 10 секунд.
+# Это поможет нам убедиться, что Клиент не «встал», пока выполняется эта задача.
+
 # @shared_task
 # def printer(N):
 #     for i in range (N):
@@ -25,13 +24,13 @@ import datetime
 # печатает число от 1 до переданного числа:
 
 @shared_task
-#def notification(sender, instance, **kwargs):
+# def notification(sender, instance, **kwargs):
 def notification(instance_id):
-    #if kwargs['action'] == 'post_add':
+    # if kwargs['action'] == 'post_add':
     instance = Post.objects.get(pk=instance_id)
     categories = list(instance.post.all())
 
-    if categories: # we should check it as creation of the post in admin panel doesn't assign category
+    if categories:  # we should check it as creation of the post in admin panel doesn't assign category
         cat_name_list = []
         id_cat_list = []
         for el in categories:
@@ -63,6 +62,7 @@ def notification(instance_id):
                 pass
 
 # еженедельная рассылка последних новостей
+
 
 @shared_task
 def every_wk_news_mailing():
@@ -106,4 +106,3 @@ def every_wk_news_mailing():
                     msg = EmailMultiAlternatives(subject, text_content, None, [email])
                     msg.attach_alternative(html_content, "text/html")
                     msg.send()
-

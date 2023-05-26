@@ -1,0 +1,16 @@
+Watching for file changes with StatReloader
+Not Found: /
+"GET / HTTP/1.1" 404 2385
+Not Found: /
+"GET / HTTP/1.1" 404 2385
+"GET /admin/ HTTP/1.1" 200 17354
+"GET /allnews/ HTTP/1.1" 200 23296
+/Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+INFO Watching for file changes with StatReloader
+INFO "GET /allnews/ HTTP/1.1" 200 23296
+INFO /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+2023-05-23 16:10:04,361 INFO Watching for file changes with StatReloader
+2023-05-23 16:13:57,738 INFO /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/news/views.py changed, reloading.
+2023-05-23 16:13:58,093 INFO Watching for file changes with StatReloader
+2023-05-23 16:19:38,063 INFO /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+2023-05-23 16:27:17,341 INFO Watching for file changes with StatReloader

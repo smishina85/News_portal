@@ -1,0 +1,2 @@
+ERROR: 2023-05-25 11:30:48,181; "GET /allnews/ HTTP/1.1" 500 145; path: /Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/core/servers/basehttp.py; exc_info = None
+ERROR: 2023-05-25 11:32:05,081; "GET /allnews/ HTTP/1.1" 500 145; path: /Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/core/servers/basehttp.py; exc_info = None

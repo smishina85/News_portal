@@ -1,0 +1,225 @@
+INFO: 2023-05-25 10:44:07,931; module: autoreload; Watching for file changes with StatReloader
+INFO: 2023-05-25 10:44:08,114; module: basehttp; "GET /allnews/subscriptions/ HTTP/1.1" 200 7032
+INFO: 2023-05-25 10:45:14,889; module: basehttp; "GET /allnews/ HTTP/1.1" 200 22605
+INFO: 2023-05-25 10:45:14,927; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+INFO: 2023-05-25 10:47:20,442; module: autoreload; Watching for file changes with StatReloader
+ERROR: 2023-05-25 10:47:27,565; module: exception; Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/utils/deprecation.py", line 135, in __call__
+    response = self.process_request(request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/http/request.py", line 152, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING: 2023-05-25 10:47:27,571; module: log; Bad Request: /allnews/
+WARNING: 2023-05-25 10:47:27,572; module: basehttp; "GET /allnews/ HTTP/1.1" 400 143
+INFO: 2023-05-25 10:48:05,994; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+INFO: 2023-05-25 10:48:06,348; module: autoreload; Watching for file changes with StatReloader
+ERROR: 2023-05-25 10:48:10,963; module: exception; Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/utils/deprecation.py", line 135, in __call__
+    response = self.process_request(request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/http/request.py", line 152, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING: 2023-05-25 10:48:10,966; module: log; Bad Request: /allnews/
+WARNING: 2023-05-25 10:48:10,967; module: basehttp; "GET /allnews/ HTTP/1.1" 400 143
+INFO: 2023-05-25 10:48:50,821; module: autoreload; Watching for file changes with StatReloader
+ERROR: 2023-05-25 10:48:56,503; module: exception; Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/utils/deprecation.py", line 135, in __call__
+    response = self.process_request(request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/http/request.py", line 152, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING: 2023-05-25 10:48:56,504; module: log; Bad Request: /allnews/
+WARNING: 2023-05-25 10:48:56,504; module: basehttp; "GET /allnews/ HTTP/1.1" 400 143
+ERROR: 2023-05-25 10:49:32,665; module: exception; Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/utils/deprecation.py", line 135, in __call__
+    response = self.process_request(request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/http/request.py", line 152, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING: 2023-05-25 10:49:32,665; module: log; Bad Request: /allnews/
+WARNING: 2023-05-25 10:49:32,665; module: basehttp; "GET /allnews/ HTTP/1.1" 400 143
+INFO: 2023-05-25 10:49:33,234; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+INFO: 2023-05-25 10:49:33,564; module: autoreload; Watching for file changes with StatReloader
+INFO: 2023-05-25 10:49:38,323; module: basehttp; "GET /allnews/ HTTP/1.1" 200 22605
+INFO: 2023-05-25 10:50:26,578; module: basehttp; "GET /allnews/subscriptions/ HTTP/1.1" 200 7032
+INFO: 2023-05-25 10:50:30,268; module: basehttp; "POST /allnews/subscriptions/ HTTP/1.1" 200 7030
+INFO: 2023-05-25 10:50:33,892; module: basehttp; "POST /allnews/subscriptions/ HTTP/1.1" 200 7032
+INFO: 2023-05-25 10:50:46,127; module: basehttp; "GET /allnews/ HTTP/1.1" 200 22605
+INFO: 2023-05-25 10:51:49,778; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+INFO: 2023-05-25 10:51:50,107; module: autoreload; Watching for file changes with StatReloader
+INFO: 2023-05-25 10:51:50,325; module: basehttp; "GET /technologies/ HTTP/1.1" 200 4357
+INFO: 2023-05-25 10:51:55,355; module: basehttp; "GET /allnews/ HTTP/1.1" 200 17941
+INFO: 2023-05-25 10:53:39,609; module: basehttp; "GET /allnews/ HTTP/1.1" 200 17941
+INFO: 2023-05-25 10:54:25,079; module: autoreload; Watching for file changes with StatReloader
+WARNING: 2023-05-25 10:54:27,911; module: log; Not Found: /
+WARNING: 2023-05-25 10:54:27,911; module: basehttp; "GET / HTTP/1.1" 404 2385
+WARNING: 2023-05-25 10:54:56,220; module: log; Not Found: /
+WARNING: 2023-05-25 10:54:56,221; module: basehttp; "GET / HTTP/1.1" 404 2385
+INFO: 2023-05-25 10:54:56,534; module: basehttp; "GET /allnews/ HTTP/1.1" 200 17941
+INFO: 2023-05-25 11:03:28,781; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+INFO: 2023-05-25 11:03:28,981; module: autoreload; Watching for file changes with StatReloader
+INFO: 2023-05-25 11:26:14,722; module: autoreload; Watching for file changes with StatReloader
+WARNING: 2023-05-25 11:26:16,852; module: log; Not Found: /
+INFO: 2023-05-25 11:26:36,464; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/news/urls.py changed, reloading.
+INFO: 2023-05-25 11:26:36,805; module: autoreload; Watching for file changes with StatReloader
+WARNING: 2023-05-25 11:27:28,657; module: log; Not Found: /static/admin/css/login.css
+WARNING: 2023-05-25 11:27:33,364; module: log; Not Found: /static/admin/css/login.css
+WARNING: 2023-05-25 11:27:48,940; module: log; Not Found: /static/admin/css/login.css
+WARNING: 2023-05-25 11:27:57,763; module: log; Not Found: /static/admin/css/login.css
+WARNING: 2023-05-25 11:28:13,608; module: log; Not Found: /static/admin/css/login.css
+WARNING: 2023-05-25 11:28:59,043; module: log; Not Found: /
+WARNING: 2023-05-25 11:29:04,280; module: log; Not Found: /
+INFO: 2023-05-25 11:29:55,546; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/news/urls.py changed, reloading.
+INFO: 2023-05-25 11:29:55,877; module: autoreload; Watching for file changes with StatReloader
+WARNING: 2023-05-25 11:30:40,905; module: log; Not Found: /
+WARNING: 2023-05-25 11:30:47,881; module: log; Not Found: /
+ERROR: 2023-05-25 11:30:48,177; module: log; Internal Server Error: /allnews/
+Traceback (most recent call last):
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'post' not found. 'post' is not a valid view function or pattern name.
+ERROR: 2023-05-25 11:32:05,080; module: log; Internal Server Error: /allnews/
+Traceback (most recent call last):
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/Users/svetlana/newsproject_dir/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'post' not found. 'post' is not a valid view function or pattern name.
+INFO: 2023-05-25 11:32:05,656; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/news/urls.py changed, reloading.
+INFO: 2023-05-25 11:32:05,995; module: autoreload; Watching for file changes with StatReloader
+INFO: 2023-05-25 11:36:54,034; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+INFO: 2023-05-25 11:36:54,360; module: autoreload; Watching for file changes with StatReloader
+INFO: 2023-05-25 11:38:33,318; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+INFO: 2023-05-25 11:38:33,648; module: autoreload; Watching for file changes with StatReloader
+INFO: 2023-05-25 11:43:04,633; module: autoreload; Watching for file changes with StatReloader
+INFO: 2023-05-25 11:48:36,477; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+INFO: 2023-05-25 11:48:36,801; module: autoreload; Watching for file changes with StatReloader
+INFO: 2023-05-25 11:53:21,777; module: autoreload; /Users/svetlana/PycharmProjects/newsproject_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+INFO: 2023-05-25 11:53:22,101; module: autoreload; Watching for file changes with StatReloader
+INFO: 2023-05-25 11:53:31,938; module: autoreload; Watching for file changes with StatReloader

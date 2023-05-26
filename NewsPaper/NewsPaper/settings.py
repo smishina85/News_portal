@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
-from dotenv import load_dotenv
 from pathlib import Path
-#import warnings
+
+from dotenv import load_dotenv
+
+
+# import warnings
 
 load_dotenv()
 
@@ -30,6 +33,7 @@ SECRET_KEY = 'django-insecure-dv_u)gz%#ens!sj#9k^0*@s8l(c#qze78k(y#p4vs2xozv%a-x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ALLOWED_HOSTS = ['127.0.0.1']
 ALLOWED_HOSTS = []
 
 
@@ -66,6 +70,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+
+    # позволяет кэшировать весь сайт целиком (т. е. каждую страницу вообще).
+    # Для этого надо в settings.py добавить в список MIDDLEWARE следующие строки:
+    # 'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'NewsPaper.urls'
@@ -88,14 +98,13 @@ TEMPLATES = [
 
 # Этого раздела может не быть, добавьте его в указанном виде for allauth.
 AUTHENTICATION_BACKENDS = [
-    #встроенный бэкенд Django — 'django.contrib.auth.backends.ModelBackend' — реализующий аутентификацию по username;
+    # встроенный бэкенд Django — 'django.contrib.auth.backends.ModelBackend' —
+    # реализующий аутентификацию по username;
     'django.contrib.auth.backends.ModelBackend',
-    #бэкенд аутентификации, предоставленный пакетом allauth — 'allauth.account.auth_backends.AuthenticationBackend'.
+    # бэкенд аутентификации, предоставленный пакетом allauth — 'allauth.account.auth_backends.
+    # AuthenticationBackend'.
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
-
-
 
 WSGI_APPLICATION = 'NewsPaper.wsgi.application'
 
@@ -162,28 +171,36 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_FORMS = {"signup": "accounts.forms.CustomSignupForm"}
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True  #позволит избежать дополнительного входа и активирует аккаунт сразу, как только мы перейдём по ссылке
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 4  #хранит количество дней, когда доступна ссылка на подтверждение регистрации
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+# позволит избежать дополнительного входа и активирует аккаунт сразу, как только мы перейдём по ссылке
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 4
+# хранит количество дней, когда доступна ссылка на подтверждение регистрации
 
 # warnings.filterwarnings(
 #     'error', r"DateTimeField .* received a naive datetime",
 #     RuntimeWarning, r'django\.db\.models\.fields',
 # )
 
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #класс отправителя сообщений (у нас установлено значение по умолчанию, а значит, эта строчка не обязательна);
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# класс отправителя сообщений (у нас установлено значение по умолчанию, а значит, эта строчка не обязательна);
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru' #хост почтового сервера
-EMAIL_PORT = 465 #порт, на который почтовый сервер принимает письма
-EMAIL_HOST_USER = 'kind.mishina' #логин пользователя почтового сервера
-#EMAIL_HOST_PASSWORD = "________" #пароль пользователя почтового сервера
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD') #пароль пользователя почтового сервера
-EMAIL_USE_TLS = False #необходимость использования TLS (зависит от почтового сервера, смотрите документацию по настройке работы с сервером по SMTP)
-EMAIL_USE_SSL = True #необходимость использования SSL (зависит от почтового сервера, смотрите документацию по настройке работы с сервером по SMTP);
+EMAIL_HOST = 'smtp.yandex.ru'  # хост почтового сервера
+EMAIL_PORT = 465  # порт, на который почтовый сервер принимает письма
+EMAIL_HOST_USER = 'kind.mishina'  # логин пользователя почтового сервера
+# EMAIL_HOST_PASSWORD = "________" # пароль пользователя почтового сервера
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # пароль пользователя почтового сервера
+EMAIL_USE_TLS = False
+# необходимость использования TLS (зависит от почтового сервера,
+# смотрите документацию по настройке работы с сервером по SMTP)
+EMAIL_USE_SSL = True
+# необходимость использования SSL (зависит от почтового сервера,
+# смотрите документацию по настройке работы с сервером по SMTP);
 
-#DEFAULT_FROM_EMAIL = '______' #почтовый адрес отправителя по умолчанию.
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL') #почтовый адрес отправителя по умолчанию.
+# DEFAULT_FROM_EMAIL = '______'
+# почтовый адрес отправителя по умолчанию.
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')  # почтовый адрес отправителя по умолчанию.
 
 SERVER_EMAIL = 'kind.mishina@yandex.ru'
 MANAGERS = (
@@ -195,14 +212,16 @@ ADMINS = (
 
 EMAIL_SUBJECT_PREFIX = 'Наш портал '
 
-CELERY_BROKER_URL = 'redis://localhost:6379'  # указывает на URL брокера сообщений (Redis). По умолчанию он находится на порту 6379.
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'  #указывает на хранилище результатов выполнения задач
+CELERY_BROKER_URL = 'redis://localhost:6379'
+# указывает на URL брокера сообщений (Redis). По умолчанию он находится на порту 6379.
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+# указывает на хранилище результатов выполнения задач
 CELERY_ACCEPT_CONTENT = ['application/json']  # допустимый формат данных
 CELERY_TASK_SERIALIZER = 'json'  # метод сериализации задач.
-CELERY_RESULT_SERIALIZER = 'json' # метод сериализации результатов.
+CELERY_RESULT_SERIALIZER = 'json'  # метод сериализации результатов.
 CELERY_IMPORTS = ('news.tasks',)
 CELERY_TIMEZONE = 'Europe/Moscow'
-#CELERY_TASK_TIME_LIMIT = 30 * 60
+# CELERY_TASK_TIME_LIMIT = 30 * 60
 # время жизни таски
 
 # Если вы используете Redis Labs, то переменные CELERY_BROKER_URL и CELERY_RESULT_BACKEND должны строиться по шаблону:
@@ -213,3 +232,134 @@ CELERY_TIMEZONE = 'Europe/Moscow'
 # Также обратите внимание, что Celery с версией выше 4+ не поддерживается Windows.
 # Поэтому если у вас версия Python 3.10 и выше, запускайте Celery, добавив в команду флаг: --pool=solo.
 
+# D8 Добавляем в settings.py следующий словарь:
+CACHES = {
+    'default': {
+        'BACKEND':
+            'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache_files'),
+        # Указываем, куда будем сохранять кэшируемые файлы!
+        # Не забываем создать папку cache_files внутри папки с manage.py!
+        'TIMEOUT': 60,  # by default 300 sec
+    }
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_logger': False,
+    'loggers': {
+        'django': {
+            'handlers': ['console_debug_info', 'console_warn', 'console_err_crit', 'file_info'],
+            'level': 'DEBUG',
+        },
+        'django.server': {
+            'handlers': ['file_errors', 'mail_error'],
+            'level': 'ERROR',
+            # 'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['file_errors', 'mail_error'],
+            'level': 'ERROR',
+            # 'propagate': False,
+        },
+        'django.template': {
+            'handlers': ['file_errors'],
+            'level': 'ERROR',
+            # 'propagate': False,
+        },
+        'django.db.backends': {
+            'handlers': ['file_errors'],
+            'level': 'ERROR',
+            # 'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['file_security'],
+            'level': 'INFO',
+            # 'propagate': False,
+        },
+
+    },
+    'handlers': {
+        'console_debug_info': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'format_lev_time_msg',
+        },
+        'console_warn': {
+            'level': 'WARNING',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'format_lev_time_msg_path',
+        },
+        'console_err_crit': {
+            'level': 'ERROR',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'format_lev_time_msg_path_exc',
+
+        },
+        'file_info': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'general.log',
+            'formatter': 'format_lev_time_module_msg',
+            'filters': ['require_debug_false'],
+
+        },
+        'file_errors': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'logging.FileHandler',
+            'filename': 'errors.log',
+            'formatter': 'format_lev_time_msg_path_exc',
+
+        },
+        'file_security': {
+            'level': 'INFO',
+            'filters': ['require_debug_false'],
+            'class': 'logging.FileHandler',
+            'filename': 'security.log',
+            'formatter': 'format_lev_time_module_msg',
+
+        },
+        'mail_error': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'format_lev_time_msg_path',
+
+        },
+
+    },
+    'formatters': {
+        'format_lev_time_msg': {
+            'format': '{levelname}: {asctime}; {message}',
+            'datetime': '%Y.%m.%d %H:%M:%S',
+            'style': '{',
+        },
+        'format_lev_time_msg_path': {
+            'format': '{levelname}: {asctime}; {message}; path: {pathname}',
+            'datetime': '%Y.%m.%d %H:%M:%S',
+            'style': '{',
+        },
+        'format_lev_time_msg_path_exc': {
+            'format': '{levelname}: {asctime}; {message}; path: {pathname}; exc_info = {exc_info}',
+            'datetime': '%Y.%m.%d %H:%M:%S',
+            'style': '{',
+        },
+        'format_lev_time_module_msg': {
+            'format': '{levelname}: {asctime}; module: {module}; {message}',
+            'datetime': '%Y.%m.%d %H:%M:%S',
+            'style': '{',
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+}
